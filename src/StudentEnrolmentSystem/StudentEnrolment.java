@@ -1,7 +1,10 @@
 package StudentEnrolmentSystem;
 
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class StudentEnrolment implements StudentEnrolmentManager {
     // three properties and an arrayList to store enrollment
@@ -69,7 +72,7 @@ public class StudentEnrolment implements StudentEnrolmentManager {
 
     //Return information of one given student
     @Override
-    public StudentEnrolment getOne(int id){
+    public StudentEnrolment getOne(String id){
         for(int i = 0; i < studentList.size(); i++){
             //return student if the given id in the arrayList
             if (studentList.get(i).getStudent().getId() == id){
@@ -84,15 +87,10 @@ public class StudentEnrolment implements StudentEnrolmentManager {
         return studentList;
     }
 
-    //Main function
-    public static void main(String[] args) {
-        System.out.println("WELCOME TO STUDENT ENROLMENT SYSTEM!!!");
-        System.out.println("             ---♡♡♡---");
 
 
-        //Create information of some students in Student class
-
-    }
 }
+
+
 
 
