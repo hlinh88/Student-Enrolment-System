@@ -3,7 +3,7 @@ package StudentEnrolmentSystem;
 import java.time.LocalDate;
 
 public class Student {
-    private int id;
+    private String id;
     private String name;
     private LocalDate birthdate;
 
@@ -13,7 +13,7 @@ public class Student {
      * @param birthdate
      */
 
-    public Student(int id, String name, LocalDate birthdate) {
+    public Student(String id, String name, LocalDate birthdate) {
         this.id = id;
         this.name = name;
         this.birthdate = birthdate;
@@ -22,13 +22,13 @@ public class Student {
     /**
      * @return the id
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     /**
