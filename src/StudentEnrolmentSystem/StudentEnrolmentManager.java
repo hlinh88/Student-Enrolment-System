@@ -13,7 +13,7 @@ public interface StudentEnrolmentManager {
     // public boolean delete(int id);
 
     //Return student with given id
-    public StudentEnrolment getOne(int id);
+    public StudentEnrolment getOne(String id);
 
     //Return student array list
     public ArrayList<StudentEnrolment> getAll();
