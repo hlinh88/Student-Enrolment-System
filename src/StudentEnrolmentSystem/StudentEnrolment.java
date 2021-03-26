@@ -24,6 +24,7 @@ public class StudentEnrolment implements StudentEnrolmentManager {
         this.semester = semester;
     }
 
+
     public Student getStudent() {
         return student;
     }
