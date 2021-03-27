@@ -5,20 +5,25 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Iterator;
 
 public class StudentEnrolment implements StudentEnrolmentManager {
     // three properties and an arrayList to store enrollment
     private Student student;
     private Course course;
     private String semester;
-    public ArrayList<StudentEnrolment> studentList= new ArrayList<StudentEnrolment>();
+    public ArrayList<StudentEnrolment> enrolmentList= new ArrayList<StudentEnrolment>();
 
+    public StudentEnrolment(){
+
+    }
     /**
      * @param student
      * @param course
      * @param semester
      */
     public StudentEnrolment(Student student, Course course, String semester) {
+        super();
         this.student = student;
         this.course = course;
         this.semester = semester;
@@ -52,40 +57,55 @@ public class StudentEnrolment implements StudentEnrolmentManager {
     //Add StudentEnrollment to list
     @Override
     public void add(StudentEnrolment student){
-        studentList.add(student);
+        enrolmentList.add(student);
     }
 
     //Update student data
     @Override
     public void update(StudentEnrolment update){
         //For loop to go through the arrayList
-        for (int i = 0; i < studentList.size(); i++){
-            StudentEnrolment student = studentList.get(i);
+        for (int i = 0; i < enrolmentList.size(); i++){
+            StudentEnrolment student = enrolmentList.get(i);
             //Finding the student elements in the list to update
             if (student.getStudent().getId() == update.getStudent().getId()){
-                studentList.set(i, update);
+                enrolmentList.set(i, update);
                 break;
             }
         }
     }
 
     //Delete student data
+    @Override
+    public boolean delete(String id) {
+        Iterator<StudentEnrolment> i = enrolmentList.iterator();
+        StudentEnrolment stud =null;
+        while (i.hasNext()) {
+            stud = (StudentEnrolment) i.next();
+            if (stud.getStudent().getId()==id) {
+                i.remove();
+                System.out.println("\nThe given student enrollment is removed");
+                break;
+            }
+        }
+        return false;
+    }
 
     //Return information of one given student
     @Override
     public StudentEnrolment getOne(String id){
-        for(int i = 0; i < studentList.size(); i++){
+        for(int i = 0; i < enrolmentList.size(); i++){
             //return student if the given id in the arrayList
-            if (studentList.get(i).getStudent().getId() == id){
-                return studentList.get(i);
+            if (enrolmentList.get(i).getStudent().getId() == id){
+                return enrolmentList.get(i);
             }
         }
         return null;
     }
 
     //Return all elements in the arrayList
+    @Override
     public ArrayList<StudentEnrolment> getAll(){
-        return studentList;
+        return enrolmentList;
     }
 
 

@@ -4,6 +4,10 @@ public class Course {
     private String id;
     private String name;
     private int numOfCredits;
+
+    public Course(){
+
+    }
     /**
      * @param id
      * @param name
@@ -11,6 +15,7 @@ public class Course {
      */
 
     public Course(String id, String name, int numOfCredits) {
+        super();
         this.id = id;
         this.name = name;
         this.numOfCredits = numOfCredits;

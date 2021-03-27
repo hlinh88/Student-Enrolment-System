@@ -7,13 +7,17 @@ public class Student {
     private String name;
     private LocalDate birthdate;
 
+    public Student(){
+
+    }
+
     /**
      * @param id
      * @param name
      * @param birthdate
      */
-
     public Student(String id, String name, LocalDate birthdate) {
+        super();
         this.id = id;
         this.name = name;
         this.birthdate = birthdate;
