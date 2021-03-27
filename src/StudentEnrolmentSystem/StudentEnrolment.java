@@ -17,6 +17,8 @@ public class StudentEnrolment implements StudentEnrolmentManager {
     public StudentEnrolment(){
 
     }
+
+
     /**
      * @param student
      * @param course
@@ -52,6 +54,15 @@ public class StudentEnrolment implements StudentEnrolmentManager {
 
     public void setSemester(String semester) {
         this.semester = semester;
+    }
+
+    @Override
+    public String toString() {
+        return "StudentEnrolment{" +
+                "student=" + student +
+                ", course=" + course +
+                ", semester='" + semester + '\'' +
+                '}';
     }
 
     //Add StudentEnrollment to list
@@ -91,7 +102,7 @@ public class StudentEnrolment implements StudentEnrolmentManager {
     public StudentEnrolment getOne(String id){
         for(int i = 0; i < enrolmentList.size(); i++){
             //return student if the given id in the arrayList
-            if (enrolmentList.get(i).getStudent().getId() == id){
+            if (enrolmentList.get(i).getStudent().getId().equals(id)){
                 return enrolmentList.get(i);
             }
         }
