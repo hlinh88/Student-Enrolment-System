@@ -153,19 +153,52 @@ public class Main {
                     String updateSemester = scan.next();
                     //Create an arrayList to store all courses of a student
                     ArrayList<Course> courseOfAStudent = new ArrayList<>();
+                    //Create an arrayList to store all Enrollment of that student
+                    ArrayList<StudentEnrolment> enrolmentOfAStudent = new ArrayList<>();
 
                     //For loop to get the student element for update
                     for (int i = 0; i < studentEnrolment.enrolmentList.size(); i++){
                         //check the student in the enrolmentList has the unique ID and enrolled in unique semester
                         if (studentEnrolment.enrolmentList.get(i).getStudent().getId() == (updateStudentID)
                         && studentEnrolment.enrolmentList.get(i).getSemester() == (updateSemester)){
+                            //add the course to courses that student has
                             courseOfAStudent.add(studentEnrolment.enrolmentList.get(i).getCourse());
+                            enrolmentOfAStudent.add(studentEnrolment.enrolmentList.get(i));
                         }
                     }
                     //Print all the courses of a student
                     System.out.println("Courses: " + courseOfAStudent);
 
-                    //kẹt ở phần update
+                    //Ask user to update or delete
+                    System.out.println("1. Update a course\n"+
+                                        "2. Delete a course");
+                    String userAns = scan.next();
+                    //Update the course option
+                    if (userAns == "1"){
+                        System.out.println("Course ID need to update: ");
+                        String courseIdNeedToUpdate = scan.next();
+                        System.out.println("Course ID updated: ");
+                        String courseIdUpdated = scan.next();
+                        for (int i = 0; i < enrolmentOfAStudent.size(); i++){
+                            //check the course need to update
+                            if (enrolmentOfAStudent.get(i).getCourse().getId() == courseIdNeedToUpdate){
+                                //Store information before update
+                                StudentEnrolment temp = enrolmentOfAStudent.get(i);
+                                //Update the course of a student
+                                enrolmentOfAStudent.get(i).getCourse().setId(courseIdUpdated);
+                                //Update it in the StudentEnrollment List in StudentEnrollment.java
+                                studentEnrolment.update(temp, enrolmentOfAStudent.get(i));
+                            }
+                        }
+                    }
+                    else if (userAns == "2"){
+                        System.out.println("Course ID need to delete: ");
+                        String courseDelete = scan.next();
+                    }
+                    else{
+                        System.out.println("Invalid input");
+                        break;
+                    }
             }
 
 

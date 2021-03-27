@@ -62,12 +62,11 @@ public class StudentEnrolment implements StudentEnrolmentManager {
 
     //Update student data
     @Override
-    public void update(StudentEnrolment update){
+    public void update(StudentEnrolment needToUpdate,StudentEnrolment update) {
         //For loop to go through the arrayList
-        for (int i = 0; i < enrolmentList.size(); i++){
+        for (int i = 0; i < enrolmentList.size(); i++) {
             StudentEnrolment student = enrolmentList.get(i);
-            //Finding the student elements in the list to update
-            if (student.getStudent().getId() == update.getStudent().getId()){
+            if (student.equals(needToUpdate)) {
                 enrolmentList.set(i, update);
                 break;
             }

@@ -7,7 +7,7 @@ public interface StudentEnrolmentManager {
     public void add(StudentEnrolment s);
 
     //Update an enrolment of student to the list
-    public void update(StudentEnrolment s);
+    public void update(StudentEnrolment needToUpdate,StudentEnrolment update);
 
     //Delete student with given id
     public boolean delete(String id);
