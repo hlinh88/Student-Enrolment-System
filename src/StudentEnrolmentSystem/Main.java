@@ -168,36 +168,51 @@ public class Main {
                     }
                     //Print all the courses of a student
                     System.out.println("Courses: " + courseOfAStudent);
-
-                    //Ask user to update or delete
-                    System.out.println("1. Update a course\n"+
-                                        "2. Delete a course");
-                    String userAns = scan.next();
-                    //Update the course option
-                    if (userAns == "1"){
-                        System.out.println("Course ID need to update: ");
-                        String courseIdNeedToUpdate = scan.next();
-                        System.out.println("Course ID updated: ");
-                        String courseIdUpdated = scan.next();
-                        for (int i = 0; i < enrolmentOfAStudent.size(); i++){
-                            //check the course need to update
-                            if (enrolmentOfAStudent.get(i).getCourse().getId() == courseIdNeedToUpdate){
-                                //Store information before update
-                                StudentEnrolment temp = enrolmentOfAStudent.get(i);
-                                //Update the course of a student
-                                enrolmentOfAStudent.get(i).getCourse().setId(courseIdUpdated);
-                                //Update it in the StudentEnrollment List in StudentEnrollment.java
-                                studentEnrolment.update(temp, enrolmentOfAStudent.get(i));
+                    boolean stillUpOrDel = false;
+                    while(!stillUpOrDel) {
+                        //Ask user to update or delete
+                        System.out.println("1. Update a course\n" +
+                                "2. Delete a course" +
+                                "0. Quit");
+                        String userAns = scan.next();
+                        //Update the course option
+                        if (userAns == "1") {
+                            System.out.println("Course ID need to update: ");
+                            String courseIdNeedToUpdate = scan.next();
+                            System.out.println("Course ID updated: ");
+                            String courseIdUpdated = scan.next();
+                            for (int i = 0; i < enrolmentOfAStudent.size(); i++) {
+                                //check the course need to update
+                                if (enrolmentOfAStudent.get(i).getCourse().getId() == courseIdNeedToUpdate) {
+                                    //Store information before update
+                                    StudentEnrolment temp = enrolmentOfAStudent.get(i);
+                                    //Update the course of a student
+                                    enrolmentOfAStudent.get(i).getCourse().setId(courseIdUpdated);
+                                    //Update it in the StudentEnrollment List in StudentEnrollment.java
+                                    studentEnrolment.update(temp, enrolmentOfAStudent.get(i));
+                                }
                             }
                         }
-                    }
-                    else if (userAns == "2"){
-                        System.out.println("Course ID need to delete: ");
-                        String courseDelete = scan.next();
-                    }
-                    else{
-                        System.out.println("Invalid input");
-                        break;
+                        //Delete the course option
+                        else if (userAns == "2") {
+                            System.out.println("Course ID need to delete: ");
+                            String courseDelete = scan.next();
+                            for (int i = 0; i < enrolmentOfAStudent.size(); i++) {
+                                if (enrolmentOfAStudent.get(i).getCourse().getId() == courseDelete) {
+                                    //Find the course and delete in the StudentEnrollment List in StudentEnrollment.java
+                                    studentEnrolment.delete(enrolmentOfAStudent.get(i));
+                                }
+                            }
+                        }
+                        else if(userAns=="0"){
+                            System.out.println("Thanks for using the system, you can continue your work!");
+                            break;
+                        }
+                        else {
+                            System.out.println("Invalid input");
+                            break;
+
+                        }
                     }
             }
 

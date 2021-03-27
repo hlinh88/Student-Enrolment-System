@@ -10,7 +10,7 @@ public interface StudentEnrolmentManager {
     public void update(StudentEnrolment needToUpdate,StudentEnrolment update);
 
     //Delete student with given id
-    public boolean delete(String id);
+    public void delete(StudentEnrolment delete);
 
     //Return student with given id
     public StudentEnrolment getOne(String id);

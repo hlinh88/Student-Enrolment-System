@@ -75,18 +75,15 @@ public class StudentEnrolment implements StudentEnrolmentManager {
 
     //Delete student data
     @Override
-    public boolean delete(String id) {
-        Iterator<StudentEnrolment> i = enrolmentList.iterator();
-        StudentEnrolment stud =null;
-        while (i.hasNext()) {
-            stud = (StudentEnrolment) i.next();
-            if (stud.getStudent().getId()==id) {
-                i.remove();
-                System.out.println("\nThe given student enrollment is removed");
+    public void delete(StudentEnrolment delete) {
+        for (int i = 0; i < enrolmentList.size(); i++){
+            StudentEnrolment student = enrolmentList.get(i);
+            if (student.equals(delete)){
+                enrolmentList.remove(student);
                 break;
             }
         }
-        return false;
+
     }
 
     //Return information of one given student
