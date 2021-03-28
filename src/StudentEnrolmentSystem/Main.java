@@ -63,7 +63,7 @@ public class Main {
         while (!quit) {
             System.out.println("WELCOME TO STUDENT ENROLMENT SYSTEM!!!");
             System.out.println("             ---♡♡♡---");
-            System.out.println("1. Create a student information\n" +
+            System.out.print("1. Create a student information\n" +
                             "2. Create a course information\n" +
                             "3. Enroll a students for 1 semester\n" +
                             "4. Print all courses of a student in a semester. Update or add or delete courses from the list\n" +
@@ -85,14 +85,14 @@ public class Main {
             switch (option) {
                 //case 1 (Create a student information)
                 case "1":
-                    System.out.println("Create a student information");
+                    System.out.print("Create a student information");
                     //Get student information from user input
-                    System.out.println("Student ID: ");
+                    System.out.print("Student ID: ");
                     String sID = scan.next();
-                    System.out.println("Student name: ");
+                    System.out.print("Student name: ");
                     String studentName = scan.next();
                     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("M/d/yyyy");
-                    System.out.println("Birthdate: (MM/DD/YYYY)");
+                    System.out.print("Birthdate: (MM/DD/YYYY)");
                     LocalDate studentBirthDate = LocalDate.parse(scan.next(), dateFormat);
                     //Create new student
                     Student student = new Student(sID, studentName, studentBirthDate);
@@ -102,13 +102,13 @@ public class Main {
 
                 //case 2 (Create a course information)
                 case "2":
-                    System.out.println("Create a course information");
+                    System.out.print("Create a course information");
                     //Get course information from user input
-                    System.out.println("Course ID: ");
+                    System.out.print("Course ID: ");
                     String cID = scan.next();
-                    System.out.println("Course name: ");
+                    System.out.print("Course name: ");
                     String courseName = scan.next();
-                    System.out.println("Number of credits: ");
+                    System.out.print("Number of credits: ");
                     int numOfCredits = scan.nextInt();
                     //Create new course
                     Course course = new Course(cID, courseName, numOfCredits);
@@ -117,13 +117,13 @@ public class Main {
 
                 //case 3 (Enroll a students for 1 semester)
                 case "3":
-                    System.out.println("Enroll a students for 1 semester");
+                    System.out.print("Enroll a students for 1 semester");
                     //Ask for student id, course, and semester to add to the enrollment list
-                    System.out.println("Student ID: ");
+                    System.out.print("Student ID: ");
                     String studentId = scan.next();
-                    System.out.println("Course: ");
+                    System.out.print("Course: ");
                     String courseId = scan.next();
-                    System.out.println("Semester: ");
+                    System.out.print("Semester: ");
                     String semester = scan.next();
                     Student enrolledStudent = new Student();
                     Course enrolledCourse = new Course();
@@ -148,9 +148,9 @@ public class Main {
                 case "4":
                     System.out.println("Update an enrolment of a students for 1 semester");
                     //Get the student that need to update enrollment
-                    System.out.println("Student ID of student that you want to update: ");
+                    System.out.print("Student ID of student that you want to update: ");
                     String updateStudentID = scan.next();
-                    System.out.println("Semester of student that you want to update: ");
+                    System.out.print("Semester of student that you want to update: ");
                     String updateSemester = scan.next();
                     //Create an arrayList to store all courses of a student
                     ArrayList<String> courseOfAStudent = new ArrayList<>();
@@ -169,19 +169,59 @@ public class Main {
                         }
                     }
                     //Print all the courses of a student
-                    System.out.println("Courses: " + courseOfAStudent);
+                    System.out.println("Courses of student " + updateStudentID +": ");
+                    //Loop printing all courses of a student
+                    for (int i = 0; i < courseOfAStudent.size(); i++){
+                        System.out.println(courseOfAStudent.get(i));
+                    }
+
+
                     boolean stillUpOrDel = false;
                     while(!stillUpOrDel) {
                         //Ask user to update or delete
-                        System.out.println("1. Update a course\n" +
+                        System.out.print("1. Add new course\n" +
                                 "2. Delete a course\n" +
-                                "0. Quit");
+                                "3. Update a course\n" +
+                                "0. Quit\n" +
+                                "Your option: ");
                         String userAns = scan.next();
-                        //Update the course option
-                        if (userAns.equals("1")) {
-                            System.out.println("Course ID need to update: ");
+                        //Add new course option
+                        if (userAns.equals("1")){
+                            //Ask for user input course information they want to update
+                            System.out.print("Course ID: ");
+                            String addCourseID = scan.next();
+                            System.out.print("Course name: ");
+                            Scanner scanner = new Scanner(System.in);
+                            String addCourseName = "";
+                            addCourseName += scanner.nextLine();
+                            System.out.print("Number of credits: ");
+                            int addNumberOfCredits = scan.nextInt();
+                            Course newCourse = new Course(addCourseID, addCourseName, addNumberOfCredits);
+                            StudentEnrolment newCourseEnrollment = new StudentEnrolment(enrolmentOfAStudent.get(0).getStudent(), newCourse, enrolmentOfAStudent.get(0).getSemester());
+                            //Add new course to StudentEnrolment list
+                            studentEnrolment.add(newCourseEnrollment);
+                            System.out.println("Added successfully!!!");
+                        }
+
+
+                        //Delete the course option
+                        else if (userAns.equals("2")) {
+                            System.out.print("Course ID need to delete: ");
+                            String courseDelete = scan.next();
+                            for (int i = 0; i < enrolmentOfAStudent.size(); i++) {
+                                if (enrolmentOfAStudent.get(i).getCourse().getId().equals(courseDelete)) {
+                                    //Find the course and delete in the StudentEnrollment List in StudentEnrollment.java
+                                    studentEnrolment.delete(enrolmentOfAStudent.get(i));
+                                    break;
+                                }
+                            }
+                            System.out.println("Deleted successfully!!!");
+                        }
+                        //Update the course option (Thiếu name và number of credits)
+                        else if (userAns.equals("3")) {
+                            System.out.print("Course ID need to update: ");
                             String courseIdNeedToUpdate = scan.next();
-                            System.out.println("Course ID updated: ");
+                            System.out.print("Course ID updated: ");
                             String courseIdUpdated = scan.next();
                             for (int i = 0; i < enrolmentOfAStudent.size(); i++) {
                                 //check the course need to update
@@ -194,28 +234,23 @@ public class Main {
                                     studentEnrolment.update(temp, enrolmentOfAStudent.get(i));
                                 }
                             }
-                        }
-                        //Delete the course option
-                        else if (userAns.equals("2")) {
-                            System.out.println("Course ID need to delete: ");
-                            String courseDelete = scan.next();
-                            for (int i = 0; i < enrolmentOfAStudent.size(); i++) {
-                                if (enrolmentOfAStudent.get(i).getCourse().getId().equals(courseDelete)) {
-                                    //Find the course and delete in the StudentEnrollment List in StudentEnrollment.java
-                                    studentEnrolment.delete(enrolmentOfAStudent.get(i));
-                                }
-                            }
+                            System.out.println("Updated successfully!!!");
                         }
                         else if(userAns.equals("0")){
                             System.out.println("Thanks for using the system, you can continue your work!");
                             break;
                         }
                         else {
-                            System.out.println("Invalid input");
+                            System.out.println("Invalid input. Please try again!");
                             break;
 
                         }
+
                     }
+                    //Print all courses for 1 student in 1 semester
+                case "5":
+                    System.out.println("Display all courses for 1 student in 1 semester");
+
             }
 
 
