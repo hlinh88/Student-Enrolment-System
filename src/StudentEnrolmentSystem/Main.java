@@ -78,7 +78,8 @@ public class Main {
                     5. Print all courses for 1 student in 1 semester
                     6. Print all students of 1 course in 1 semester
                     7. Print all courses offered in 1 semester
-                    8. Print all enrollments\s
+                    8. Get information of an enrolment
+                    9. Print all enrollments\s
                     0. Quit
                     Your option:\s""");
 
@@ -108,6 +109,11 @@ public class Main {
                     Student student = new Student(sID, studentName, studentBirthDate);
                     //Add student to student list
                     studentList.add(student);
+                    System.out.println("Created student successfully!");
+                    //Print student list
+                    for (Student list : studentList) {
+                        System.out.println(list);
+                    }
 
 
                 case "2":
@@ -124,6 +130,12 @@ public class Main {
                     Course course = new Course(cID, courseName, numOfCredits);
                     //Add course to course list
                     courseList.add(course);
+                    System.out.println("Created course successfully!");
+                    //Print course list
+                    for (Course list : courseList) {
+                        System.out.println(list);
+                    }
+
 
 
                 case "3":
@@ -352,7 +364,14 @@ public class Main {
                     }
 
                 case "8":
-                    //Get information of a student or a course
+                    //Get information of one enrolment
+                    System.out.print("Student ID of that enrolment: ");
+                    String sid = scan.next();
+                    System.out.print("Course ID of that enrolment: ");
+                    String cid = scan.next();
+                    //Print that enrolment
+                    System.out.println("Enrolment: " + studentEnrolment.getOne(sid,cid));
+                    break;
 
                 case "9":
                     //Display all enrollments
@@ -362,6 +381,13 @@ public class Main {
                     for (StudentEnrolment enrolment : printAll) {
                         System.out.println(enrolment);
                     }
+                case "0":
+                    System.out.println("Goodbye! Thank you for using the system!");
+                    quit = true;
+                    break;
+                default:
+                    System.out.println("Invalid input");
+                    break;
             }
 
 

@@ -99,10 +99,10 @@ public class StudentEnrolment implements StudentEnrolmentManager {
 
     //Return information of one given student
     @Override
-    public StudentEnrolment getOne(String id){
-        for(int i = 0; i < enrolmentList.size(); i++){
+    public StudentEnrolment getOne(String sid, String cid){
+        for (int i = 0; i < enrolmentList.size(); i++) {
             //return student if the given id in the arrayList
-            if (enrolmentList.get(i).getStudent().getId().equals(id)){
+            if (enrolmentList.get(i).getStudent().getId().equals(sid) && enrolmentList.get(i).getCourse().getId().equals(cid) ) {
                 return enrolmentList.get(i);
             }
         }

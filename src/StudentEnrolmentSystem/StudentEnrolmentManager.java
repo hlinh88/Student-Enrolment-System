@@ -13,7 +13,7 @@ public interface StudentEnrolmentManager {
     public void delete(StudentEnrolment delete);
 
     //Return student with given id
-    public StudentEnrolment getOne(String id);
+    public StudentEnrolment getOne(String sid, String cid);
 
     //Return student array list
     public ArrayList<StudentEnrolment> getAll();
