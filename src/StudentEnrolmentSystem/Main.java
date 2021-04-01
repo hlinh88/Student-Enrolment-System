@@ -96,15 +96,18 @@ public class Main {
             switch (option) {
                 case "1":
                     //case 1 (Create a new student information)
-                    System.out.print("Create a student information");
+                    System.out.println("Create a student information");
                     //Get student information from user input
                     System.out.print("Student ID: ");
                     String sID = scan.next();
+                    Scanner studentNameScan = new Scanner(System.in);
                     System.out.print("Student name: ");
-                    String studentName = scan.next();
+                    String studentName = "";
+                    studentName += studentNameScan.nextLine();
+                    Scanner birthScan = new Scanner(System.in);
                     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("M/d/yyyy");
-                    System.out.print("Birthdate: (MM/DD/YYYY)");
-                    LocalDate studentBirthDate = LocalDate.parse(scan.next(), dateFormat);
+                    System.out.print("Birthdate (MM/DD/YYYY): ");
+                    LocalDate studentBirthDate = LocalDate.parse(birthScan.next(), dateFormat);
                     //Create new student
                     Student student = new Student(sID, studentName, studentBirthDate);
                     //Add student to student list
@@ -112,18 +115,21 @@ public class Main {
                     System.out.println("Created student successfully!");
                     //Print student list
                     for (Student list : studentList) {
-                        System.out.println(list);
+                        System.out.println(list.toString());
                     }
+                    break;
 
 
                 case "2":
                     //case 2 (Create a new course information)
-                    System.out.print("Create a course information");
+                    System.out.println("Create a course information");
                     //Get course information from user input
                     System.out.print("Course ID: ");
                     String cID = scan.next();
+                    Scanner courseNameScan = new Scanner(System.in);
                     System.out.print("Course name: ");
-                    String courseName = scan.next();
+                    String courseName = "";
+                    courseName += courseNameScan.nextLine();
                     System.out.print("Number of credits: ");
                     int numOfCredits = scan.nextInt();
                     //Create new course
@@ -133,8 +139,9 @@ public class Main {
                     System.out.println("Created course successfully!");
                     //Print course list
                     for (Course list : courseList) {
-                        System.out.println(list);
+                        System.out.println(list.toString());
                     }
+                    break;
 
 
 
@@ -154,7 +161,7 @@ public class Main {
                     for (Course listOfCourse : courseList) {
                         System.out.println(listOfCourse);
                     }
-                    System.out.print("Pick a course to enroll (If you want to add a new course, enter 'QUIT' and choose option 1.): ");
+                    System.out.print("Pick a course ID to enroll (If you want to add a new course, enter 'QUIT' and choose option 1.): ");
                     String courseIdEnroll = scan.next();
                     if (courseIdEnroll.equals("QUIT")){
                         break;
@@ -316,11 +323,12 @@ public class Main {
                     for (String s : allCourseOfAStudent) {
                         System.out.println(s);
                     }
+                    break;
 
 
                 case "6":
                     //Print all students of 1 course in 1 semester
-                    System.out.print("Enter the course ID you want to check: ");
+                    System.out.print("Enter the course ID you want to check (Uppercase needed): ");
                     String courseIDOfAllStudents = scan.next();
                     System.out.print("Semester: ");
                     String semesterOfAllStudents = scan.next();
@@ -338,6 +346,7 @@ public class Main {
                     for (String s : studentOfCourseAndSemester) {
                         System.out.println(s);
                     }
+                    break;
 
                 case "7":
                     //Print all courses offered in 1 semester
@@ -362,6 +371,7 @@ public class Main {
                     for (String s : removeDuplicated) {
                         System.out.println(s);
                     }
+                    break;
 
                 case "8":
                     //Get information of one enrolment
@@ -370,7 +380,7 @@ public class Main {
                     System.out.print("Course ID of that enrolment: ");
                     String cid = scan.next();
                     //Print that enrolment
-                    System.out.println("Enrolment: " + studentEnrolment.getOne(sid,cid));
+                    System.out.println("Information of that enrolment: \n" + studentEnrolment.getOne(sid,cid));
                     break;
 
                 case "9":
@@ -381,6 +391,7 @@ public class Main {
                     for (StudentEnrolment enrolment : printAll) {
                         System.out.println(enrolment);
                     }
+                    break;
                 case "0":
                     System.out.println("Goodbye! Thank you for using the system!");
                     quit = true;
