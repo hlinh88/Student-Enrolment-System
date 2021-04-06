@@ -67,8 +67,10 @@ public class StudentEnrolment implements StudentEnrolmentManager {
 
     //Add StudentEnrollment to list
     @Override
-    public void add(StudentEnrolment student){
-        enrolmentList.add(student);
+    public void add(StudentEnrolment enrolment){
+
+        enrolmentList.add(enrolment);
+
     }
 
     //Update student data

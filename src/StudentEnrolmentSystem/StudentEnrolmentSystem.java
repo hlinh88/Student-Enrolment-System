@@ -13,11 +13,33 @@ import java.io.FileWriter;
 
 public class StudentEnrolmentSystem {
 
+    /**
+     * Saving CSV file method
+
+     */
+    public static void saveCSV(String str, String fileName){
+        try{
+            FileWriter fw = new FileWriter(fileName, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            pw.println(str);
+            pw.flush();
+            pw.close();
+
+            JOptionPane.showMessageDialog(null, "File CSV saved successfully!");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "File CSV not saved successfully!");
+        }
+    }
+
+
+
 
     //Main function
-    public static void main(String[] args) throws IOException {
-         final String COMMA_DELIMITER = ",";
-         final String NEW_LINE_SEPARATOR = "\n";
+    public static void main(String[] args) {
+        final String COMMA_DELIMITER = ",";
+        final String NEW_LINE_SEPARATOR = "\n";
 
         //Create sample students information in Student class
         Student sampleStudent1 = new Student("s1111111", "Luu Khanh Linh", LocalDate.of(2002, Month.MAY, 25));
@@ -51,12 +73,10 @@ public class StudentEnrolmentSystem {
         studentEnrolment.add(sampleEnrolment6);
 
 
-
-
-
         //An array to store list of students and courses
         ArrayList<Student> studentList = new ArrayList<>();
         ArrayList<Course> courseList = new ArrayList<>();
+
 
         //Add students to the list
         studentList.add(sampleStudent1);
@@ -77,10 +97,10 @@ public class StudentEnrolmentSystem {
         boolean quit = false;
         while (!quit) {
             System.out.println("WELCOME TO STUDENT ENROLMENT SYSTEM!!!");
-            System.out.println("             ---♡♡♡---");
+            System.out.println("             ---♡ヅ♡---");
             System.out.print("""
-                    1. Create a student information
-                    2. Create a course information
+                    1. Create student information
+                    2. Create course information
                     3. Enroll a students for 1 semester
                     4. Print all courses of a student in a semester. Update or add or delete courses from the list
                     5. Print all courses for 1 student in 1 semester
@@ -199,12 +219,12 @@ public class StudentEnrolmentSystem {
 
 
                 case "4":
-                    //case 4 (Update or delete an enrolment of a students for 1 semester)
-                    System.out.println("Update an enrolment of a students for 1 semester");
+                    //case 4 (Print all courses of a student in a semester. Update or add or delete courses from the list)
+                    System.out.println("Print all courses of a student in a semester. Update or add or delete courses from the list");
                     //Get the student that need to update enrollment
-                    System.out.print("Student ID of student that you want to update: ");
+                    System.out.print("Student ID: ");
                     String updateStudentID = scan.next();
-                    System.out.print("Semester of student that you want to update: ");
+                    System.out.print("Semester: ");
                     String updateSemester = scan.next();
                     //Create an arrayList to store all courses of a student
                     ArrayList<String> courseOfAStudent = new ArrayList<>();
@@ -229,7 +249,8 @@ public class StudentEnrolmentSystem {
                         System.out.println(value);
                     }
 
-                    while(true) {
+                    boolean op = true;
+                    while(op) {
                         //Ask user to update or delete
                         System.out.print("""
                                 1. Add new course
@@ -294,6 +315,7 @@ public class StudentEnrolmentSystem {
                         }
                         else if(userAns.equals("0")){
                             System.out.println("Thanks for using the system, you can continue your work!");
+                            op = false;
                             break;
                         }
                         else {
@@ -303,6 +325,7 @@ public class StudentEnrolmentSystem {
                         }
 
                     }
+                    break;
 
                 case "5":
                     //Print all courses for 1 student in 1 semesters (same as case 4)
@@ -490,7 +513,7 @@ public class StudentEnrolmentSystem {
                     }
                     break;
                 case "0":
-                    System.out.println("Goodbye! Thank you for using the system!");
+                    System.out.println("Goodbye! Thank you for using the system! Have a good day ヅ");
                     quit = true;
                     break;
                 default:
@@ -502,23 +525,5 @@ public class StudentEnrolmentSystem {
         }
     }
 
-    /**
-     * Saving CSV file method
 
-     */
-    public static void saveCSV(String str, String fileName){
-        try{
-            FileWriter fw = new FileWriter(fileName, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-
-            pw.println(str);
-            pw.flush();
-            pw.close();
-
-            JOptionPane.showMessageDialog(null, "File CSV saved successfully!");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "File CSV not saved successfully!");
-        }
-    }
 }
