@@ -57,6 +57,24 @@ public class Course {
         this.numOfCredits = numOfCredits;
     }
 
+
+    /**
+     * check duplicated course
+     */
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()){
+            return false;
+        }
+
+        return this.id == ((Course) obj).id
+                && this.name == ((Course) obj).name
+                && this.numOfCredits == ((Course) obj).numOfCredits;
+    }
+
     @Override
     public String toString() {
         return "Course{" +

@@ -56,6 +56,23 @@ public class StudentEnrolment implements StudentEnrolmentManager {
         this.semester = semester;
     }
 
+    /**
+     * check duplicated enrolment
+     */
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()){
+            return false;
+        }
+
+        return this.student == ((StudentEnrolment) obj).student
+                && this.course == ((StudentEnrolment) obj).course
+                && this.semester == ((StudentEnrolment) obj).semester;
+    }
+
     @Override
     public String toString() {
         return "StudentEnrolment{" +

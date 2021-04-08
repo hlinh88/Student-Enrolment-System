@@ -68,4 +68,21 @@ public class Student {
                 ", birthdate=" + birthdate +
                 '}';
     }
+
+    /**
+     * check duplicated student
+     */
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()){
+            return false;
+        }
+
+        return this.id == ((Student) obj).id
+                && this.name == ((Student) obj).name
+                && this.birthdate == ((Student) obj).birthdate;
+    }
 }

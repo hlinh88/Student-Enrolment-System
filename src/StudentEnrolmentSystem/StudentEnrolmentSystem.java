@@ -5,11 +5,9 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class StudentEnrolmentSystem {
 
@@ -35,7 +33,7 @@ public class StudentEnrolmentSystem {
     /**
      * Read file
      */
-    private static void FileReader(StudentEnrolment studentEnrolment, ArrayList<Student> studentList, ArrayList<Course> courseList, String fileName) throws IOException {
+    private static void FileReader(StudentEnrolment studentEnrolment, List<Student> studentList, List<Course> courseList, String fileName) throws IOException {
         FileReader file = new FileReader(fileName);
         Scanner scanFile = new Scanner(file);
         while (scanFile.hasNextLine()){
@@ -60,21 +58,6 @@ public class StudentEnrolmentSystem {
         file.close();
     }
 
-    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list)
-    {
-        // Create a new LinkedHashSet
-        Set<T> set = new LinkedHashSet<>();
-        // Add the elements to set
-        set.addAll(list);
-        // Clear the list
-        list.clear();
-        // add the elements of set
-        // with no duplicates to the list
-        list.addAll(set);
-        // return the list
-        return list;
-    }
-
 
     //Main function
     public static void main(String[] args) throws IOException {
@@ -85,10 +68,10 @@ public class StudentEnrolmentSystem {
         StudentEnrolment studentEnrolment = new StudentEnrolment();
 
         /**
-         * These arraylist take care of the list of student and course specifically(not enrollment)
+         * These sets take care of the list of student and course specifically(not enrollment)
          */
-        ArrayList<Student> studentList = new ArrayList<>();
-        ArrayList<Course> courseList = new ArrayList<>();
+        List<Student> studentList = new ArrayList<>();
+        List<Course> courseList = new ArrayList<>();
 
 
         //Asking for user file else will run the default.csv
@@ -108,7 +91,6 @@ public class StudentEnrolmentSystem {
                 userChoice = false;
             }
         }
-
 
         
 
