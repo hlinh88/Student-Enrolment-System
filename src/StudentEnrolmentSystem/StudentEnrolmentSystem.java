@@ -1,21 +1,20 @@
 package StudentEnrolmentSystem;
 
 import javax.swing.*;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
-import java.io.FileWriter;
+import java.util.Set;
+import java.util.concurrent.Executors;
 
 public class StudentEnrolmentSystem {
 
     /**
      * Saving CSV file method
-
      */
     public static void saveCSV(String str, String fileName){
         try{
@@ -33,63 +32,85 @@ public class StudentEnrolmentSystem {
         }
     }
 
+    /**
+     * Read file
+     */
+    private static void FileReader(StudentEnrolment studentEnrolment, ArrayList<Student> studentList, ArrayList<Course> courseList, String fileName) throws IOException {
+        FileReader file = new FileReader(fileName);
+        Scanner scanFile = new Scanner(file);
+        while (scanFile.hasNextLine()){
+            String[] data = scanFile.nextLine().split(",");
+            String studentID = data[0];
+            String studentName = data[1];
+            String birthdate = data[2];
+            String courseID = data[3];
+            String courseName = data[4];
+            int numOfCredits = Integer.parseInt(data[5]);
+            String semester = data[6];
+            Student student = new Student(studentID, studentName, birthdate);
+            //Add student to student arraylist
+            studentList.add(student);
+            Course course = new Course(courseID, courseName, numOfCredits);
+            //Add course to course arraylist
+            courseList.add(course);
+            //Create enrollment
+            StudentEnrolment studentEnroll = new StudentEnrolment(student, course, semester);
+            studentEnrolment.add(studentEnroll);
+        }
+        file.close();
+    }
 
+    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list)
+    {
+        // Create a new LinkedHashSet
+        Set<T> set = new LinkedHashSet<>();
+        // Add the elements to set
+        set.addAll(list);
+        // Clear the list
+        list.clear();
+        // add the elements of set
+        // with no duplicates to the list
+        list.addAll(set);
+        // return the list
+        return list;
+    }
 
 
     //Main function
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         final String COMMA_DELIMITER = ",";
         final String NEW_LINE_SEPARATOR = "\n";
-
-        //Create sample students information in Student class
-        Student sampleStudent1 = new Student("s1111111", "Luu Khanh Linh", LocalDate.of(2002, Month.MAY, 25));
-        Student sampleStudent2 = new Student("s2222222", "Nguyen Khanh Long", LocalDate.of(1998, Month.OCTOBER, 10));
-        Student sampleStudent3 = new Student("s3333333", "Pham Hong Nhung", LocalDate.of(2000, Month.JUNE, 9));
-        Student sampleStudent4 = new Student("s4444444", "Nguyen Thi Minh Hien", LocalDate.of(2001, Month.JULY, 10));
-
-
-        //Create sample courses information in Course class
-        Course sampleCourse1 = new Course("COSC1111", "Software Architecture: Design & Implementation", 12);
-        Course sampleCourse2 = new Course("COSC2222", "Software Engineering Fundamentals for IT", 12);
-        Course sampleCourse3 = new Course("COSC3333", "Software Engineering Project Management", 12);
-        Course sampleCourse4 = new Course("COSC4444", "Programming Project 1", 12);
-
 
         //Initialize student enrolment object
         StudentEnrolment studentEnrolment = new StudentEnrolment();
 
-        //Create sample enrollments
-        StudentEnrolment sampleEnrolment1 = new StudentEnrolment(sampleStudent1, sampleCourse1, "2021A");
-        studentEnrolment.add(sampleEnrolment1);
-        StudentEnrolment sampleEnrolment2 = new StudentEnrolment(sampleStudent1, sampleCourse2, "2021A");
-        studentEnrolment.add(sampleEnrolment2);
-        StudentEnrolment sampleEnrolment3 = new StudentEnrolment(sampleStudent2, sampleCourse3, "2021A");
-        studentEnrolment.add(sampleEnrolment3);
-        StudentEnrolment sampleEnrolment4 = new StudentEnrolment(sampleStudent3, sampleCourse3, "2021A");
-        studentEnrolment.add(sampleEnrolment4);
-        StudentEnrolment sampleEnrolment5 = new StudentEnrolment(sampleStudent4, sampleCourse3, "2021A");
-        studentEnrolment.add(sampleEnrolment5);
-        StudentEnrolment sampleEnrolment6 = new StudentEnrolment(sampleStudent1, sampleCourse3, "2021A");
-        studentEnrolment.add(sampleEnrolment6);
-
-
-        //An array to store list of students and courses
+        /**
+         * These arraylist take care of the list of student and course specifically(not enrollment)
+         */
         ArrayList<Student> studentList = new ArrayList<>();
         ArrayList<Course> courseList = new ArrayList<>();
 
 
-        //Add students to the list
-        studentList.add(sampleStudent1);
-        studentList.add(sampleStudent2);
-        studentList.add(sampleStudent3);
-        studentList.add(sampleStudent4);
+        //Asking for user file else will run the default.csv
+        boolean userChoice = true;
+        while(userChoice)
+        {
+            System.out.print("Enter filename for input (###.csv) or QUIT to load the default file: ");
+            Scanner userFileInput = new Scanner(System.in);
+            String userFileIn = userFileInput.next();
+            if (userFileIn.equalsIgnoreCase("QUIT")){
+                //Loading default.csv
+                FileReader(studentEnrolment, studentList, courseList, "default.csv");
+                userChoice = false;
+            }
+            else{
+                FileReader(studentEnrolment, studentList, courseList, userFileIn);
+                userChoice = false;
+            }
+        }
 
-        //Add Courses to the list
-        courseList.add(sampleCourse1);
-        courseList.add(sampleCourse2);
-        courseList.add(sampleCourse3);
-        courseList.add(sampleCourse4);
 
+        
 
 
 
@@ -133,9 +154,8 @@ public class StudentEnrolmentSystem {
                     String studentName = "";
                     studentName += studentNameScan.nextLine();
                     Scanner birthScan = new Scanner(System.in);
-                    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("M/d/yyyy");
-                    System.out.print("Birthdate (MM/DD/YYYY): ");
-                    LocalDate studentBirthDate = LocalDate.parse(birthScan.next(), dateFormat);
+                    System.out.print("Birthdate (YYYY-MM-DD): ");
+                    String studentBirthDate = birthScan.next();
                     //Create new student
                     Student student = new Student(sID, studentName, studentBirthDate);
                     //Add student to student list
@@ -273,8 +293,11 @@ public class StudentEnrolmentSystem {
                             Course newCourse = new Course(addCourseID, addCourseName, addNumberOfCredits);
                             StudentEnrolment newCourseEnrollment = new StudentEnrolment(enrolmentOfAStudent.get(0).getStudent(), newCourse, enrolmentOfAStudent.get(0).getSemester());
                             //Add new course to StudentEnrolment list
-                            studentEnrolment.add(newCourseEnrollment);
-                            System.out.println("Added successfully!!!");
+                            if (studentEnrolment.add(newCourseEnrollment)){
+                                System.out.println("Added successfully!!!");
+                            }
+
+
 
                         }
 
@@ -286,11 +309,13 @@ public class StudentEnrolmentSystem {
                             for (StudentEnrolment enrolment : enrolmentOfAStudent) {
                                 if (enrolment.getCourse().getId().equals(courseDelete)) {
                                     //Find the course and delete in the StudentEnrollment List in StudentEnrollment.java
-                                    studentEnrolment.delete(enrolment);
+                                    if(studentEnrolment.delete(enrolment)){
+                                        System.out.println("Deleted successfully!!!");
+                                    }
                                     break;
                                 }
                             }
-                            System.out.println("Deleted successfully!!!");
+
 
                         }
                         //Update the course option
@@ -307,11 +332,12 @@ public class StudentEnrolmentSystem {
                                     //Update the course of a student
                                     enrolment.getCourse().setId(courseIdUpdated);
                                     //Update it in the StudentEnrollment List in StudentEnrollment.java
-                                    studentEnrolment.update(temp, enrolment);
+                                    if(studentEnrolment.update(temp, enrolment)){
+                                        System.out.println("Updated successfully!!!");
+                                    }
+
                                 }
                             }
-                            System.out.println("Updated successfully!!!");
-
                         }
                         else if(userAns.equals("0")){
                             System.out.println("Thanks for using the system, you can continue your work!");
@@ -524,6 +550,8 @@ public class StudentEnrolmentSystem {
 
         }
     }
+
+
 
 
 }

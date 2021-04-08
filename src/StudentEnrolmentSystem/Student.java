@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Student {
     private String id;
     private String name;
-    private LocalDate birthdate;
+    private String birthdate;
 
     public Student(){
 
@@ -16,7 +16,7 @@ public class Student {
      * @param name
      * @param birthdate
      */
-    public Student(String id, String name, LocalDate birthdate) {
+    public Student(String id, String name, String birthdate) {
         super();
         this.id = id;
         this.name = name;
@@ -50,13 +50,13 @@ public class Student {
     /**
      * @return the birthdate
      */
-    public LocalDate getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
     /**
      * @param birthdate the birthdate to set
      */
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 

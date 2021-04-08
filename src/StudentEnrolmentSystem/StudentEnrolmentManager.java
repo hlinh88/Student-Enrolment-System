@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public interface StudentEnrolmentManager {
     //Add StudentEnrolment to the list
-    public void add(StudentEnrolment s);
+    public boolean add(StudentEnrolment record);
 
     //Update an enrolment of student to the list
-    public void update(StudentEnrolment needToUpdate,StudentEnrolment update);
+    public boolean update(StudentEnrolment oldRecord,StudentEnrolment newRecord);
 
     //Delete student with given id
-    public void delete(StudentEnrolment delete);
+    public boolean delete(StudentEnrolment record);
 
     //Return student with given id
     public StudentEnrolment getOne(String sid, String cid);

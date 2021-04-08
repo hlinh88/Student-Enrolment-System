@@ -67,36 +67,44 @@ public class StudentEnrolment implements StudentEnrolmentManager {
 
     //Add StudentEnrollment to list
     @Override
-    public void add(StudentEnrolment enrolment){
-
-        enrolmentList.add(enrolment);
-
+    public boolean add(StudentEnrolment record){
+        for (int i = 0; i < enrolmentList.size(); i++){
+            if (enrolmentList.get(i).equals(record)){
+                System.out.println("Enrolment existed!");
+                return false;
+            }
+        }
+        enrolmentList.add(record);
+        return true;
     }
 
     //Update student data
     @Override
-    public void update(StudentEnrolment needToUpdate,StudentEnrolment update) {
+    public boolean update(StudentEnrolment oldRecord,StudentEnrolment newRecord) {
         //For loop to go through the arrayList
         for (int i = 0; i < enrolmentList.size(); i++) {
             StudentEnrolment student = enrolmentList.get(i);
-            if (student.equals(needToUpdate)) {
-                enrolmentList.set(i, update);
-                break;
+            if (student.equals(oldRecord)) {
+                enrolmentList.set(i, newRecord);
+                return true;
             }
         }
+        System.out.println("Invalid!");
+        return false;
     }
 
     //Delete student data
     @Override
-    public void delete(StudentEnrolment delete) {
+    public boolean delete(StudentEnrolment record) {
         for (int i = 0; i < enrolmentList.size(); i++){
             StudentEnrolment student = enrolmentList.get(i);
-            if (student.equals(delete)){
+            if (student.equals(record)){
                 enrolmentList.remove(student);
-                break;
+                return true;
             }
         }
-
+        System.out.println("Invalid!");
+        return false;
     }
 
     //Return information of one given student
