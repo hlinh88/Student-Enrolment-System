@@ -92,6 +92,7 @@ public class StudentEnrolmentSystem {
             }
         }
 
+
         
 
 
@@ -201,14 +202,14 @@ public class StudentEnrolmentSystem {
                     Student enrolledStudent = new Student();
                     Course enrolledCourse = new Course();
                     //For loop check the information of that student in the list
-                    for (Student student1 : studentList) {
-                        if (student1.getId().equals(studentIdEnroll)) {
-                            enrolledStudent = student1;
+                    for (Student studentToEnroll : studentList) {
+                        if (studentToEnroll.getId().equals(studentIdEnroll)) {
+                            enrolledStudent = studentToEnroll;
                         }
                     }
-                    for (Course item : courseList) {
-                        if (item.getId().equals(courseIdEnroll)) {
-                            enrolledCourse = item;
+                    for (Course courseToEnroll : courseList) {
+                        if (courseToEnroll.getId().equals(courseIdEnroll)) {
+                            enrolledCourse = courseToEnroll;
                         }
                     }
                     //Create enrollment for that student
@@ -233,12 +234,11 @@ public class StudentEnrolmentSystem {
                     //Create an arrayList to store all Enrollment of that student
                     ArrayList<StudentEnrolment> enrolmentOfAStudent = new ArrayList<>();
 
-
                     //For loop to get the student element for update
                     for (int i = 0; i < studentEnrolment.enrolmentList.size(); i++){
                         //check the student in the enrolmentList has the unique ID and enrolled in unique semester
-                        if (studentEnrolment.enrolmentList.get(i).getStudent().getId().equals(updateStudentID)
-                        && studentEnrolment.enrolmentList.get(i).getSemester().equals(updateSemester)){
+                        if (studentEnrolment.enrolmentList.get(i).getStudent().getId().equalsIgnoreCase(updateStudentID)
+                        && studentEnrolment.enrolmentList.get(i).getSemester().equalsIgnoreCase(updateSemester)){
                             //add the course to courses that student has
                             courseOfAStudent.add(studentEnrolment.enrolmentList.get(i).getCourse().toString());
                             enrolmentOfAStudent.add(studentEnrolment.enrolmentList.get(i));
@@ -338,14 +338,12 @@ public class StudentEnrolmentSystem {
                 case "5":
                     //Print all courses for 1 student in 1 semesters (same as case 4)
                     System.out.println("Display all courses for 1 student in 1 semester");
-                    System.out.print("Student ID of student that you want to update: ");
+                    System.out.print("Student ID: ");
                     String allCourseStudentID = scan.next();
-                    System.out.print("Semester of student that you want to update: ");
+                    System.out.print("Semester: ");
                     String allCourseSemester = scan.next();
                     //Create an arrayList to store all courses of a student
                     ArrayList<String> allCourseOfAStudent = new ArrayList<>();
-
-
 
                     //For loop to get the student element for update
                     for (int i = 0; i < studentEnrolment.enrolmentList.size(); i++){
@@ -367,7 +365,7 @@ public class StudentEnrolmentSystem {
                     }
                     //allows to save as CSV file
                     while (true){
-                        System.out.print("Save to CSV files (Y/N): ");
+                        System.out.print("Save as CSV files (Y/N): ");
                         String save = scan.next();
                         if (save.equals("Y")){
                             System.out.print("Filename (filename.txt): ");
@@ -385,22 +383,25 @@ public class StudentEnrolmentSystem {
 
                 case "6":
                     //Print all students of 1 course in 1 semester
-                    System.out.print("Enter the course ID you want to check (Uppercase needed): ");
+                    System.out.print("Enter the course ID you want to check: ");
                     String courseIDOfAllStudents = scan.next();
                     System.out.print("Semester: ");
                     String semesterOfAllStudents = scan.next();
+                    //Name of that course for displaying
+                    String nameOfThatCourse = "";
                     //Array list to store all students of user input course and semester
                     ArrayList<String> studentOfCourseAndSemester = new ArrayList<>();
                     //For loop to add all students from enrolment list to the list
                     for (int i = 0; i < studentEnrolment.enrolmentList.size(); i++){
-                        if (studentEnrolment.enrolmentList.get(i).getCourse().getId().equals(courseIDOfAllStudents)
-                        && studentEnrolment.enrolmentList.get(i).getSemester().equals(semesterOfAllStudents)){
+                        if (studentEnrolment.enrolmentList.get(i).getCourse().getId().equalsIgnoreCase(courseIDOfAllStudents)
+                        && studentEnrolment.enrolmentList.get(i).getSemester().equalsIgnoreCase(semesterOfAllStudents)){
                             studentOfCourseAndSemester.add(studentEnrolment.enrolmentList.get(i).getStudent().toString());
+                            nameOfThatCourse = studentEnrolment.enrolmentList.get(i).getCourse().getName();
                         }
                     }
                     //Display
                     String studentOfCourseAndSemesterSavedCSV = "";
-                    System.out.println("All students of course " + courseIDOfAllStudents + " of semester "+ semesterOfAllStudents + ": ");
+                    System.out.println("All students of course " + courseIDOfAllStudents + ": " + nameOfThatCourse + " of semester "+ semesterOfAllStudents + ": ");
                     for (String s : studentOfCourseAndSemester) {
                         System.out.println(s);
                         studentOfCourseAndSemesterSavedCSV += s;
@@ -409,7 +410,7 @@ public class StudentEnrolmentSystem {
 
                     //allows to save as CSV file
                     while (true){
-                        System.out.print("Save to CSV files (Y/N): ");
+                        System.out.print("Save as CSV files (Y/N): ");
                         String save = scan.next();
                         if (save.equals("Y")){
                             System.out.print("Filename (filename.txt): ");
@@ -453,7 +454,7 @@ public class StudentEnrolmentSystem {
 
                     //allows to save as CSV file
                     while (true){
-                        System.out.print("Save to CSV files (Y/N): ");
+                        System.out.print("Save as CSV files (Y/N): ");
                         String save = scan.next();
                         if (save.equals("Y")){
                             System.out.print("Filename (filename.txt): ");
@@ -478,7 +479,7 @@ public class StudentEnrolmentSystem {
                     System.out.println("Information of that enrolment: \n" + studentEnrolment.getOne(sid,cid));
                     //allows to save as CSV file
                     while (true){
-                        System.out.print("Save to CSV files (Y/N): ");
+                        System.out.print("Save as CSV files (Y/N): ");
                         String save = scan.next();
                         if (save.equals("Y")){
                             System.out.print("Filename (filename.txt): ");
@@ -506,7 +507,7 @@ public class StudentEnrolmentSystem {
                     }
                     //allows to save as CSV file
                     while (true){
-                        System.out.print("Save to CSV files (Y/N): ");
+                        System.out.print("Save as CSV files (Y/N): ");
                         String save = scan.next();
                         if (save.equals("Y")){
                             System.out.print("Filename (filename.txt): ");
