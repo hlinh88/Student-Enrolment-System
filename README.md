@@ -1,4 +1,4 @@
-# Student Enrolment System
+#Student Enrolment System
 
 ![Project Image](project-image-url)
 
@@ -11,8 +11,6 @@ You're sections headers will be used to reference location of destination.
 
 - [Description](#description)
 - [How To Use](#how-to-use)
-- [References](#references)
-- [License](#license)
 - [Author Info](#author-info)
 
 ---
@@ -26,13 +24,11 @@ Creating ReadMe's for your Github repository can be tedious.  I hope this templa
 - Technology 1
 - Technology 2
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#student-enrolment-system)
 
 ---
 
 ## How To Use
-
-#### Installation
 
 
 
@@ -41,13 +37,12 @@ Creating ReadMe's for your Github repository can be tedious.  I hope this templa
 ```html
     <p>dummy code</p>
 ```
-[Back To The Top](#read-me-template)
+[Back To The Top](#student-enrolment-system)
 
 ---
 
 ## Author Info
 
-- Twitter - [@jamesqquick](https://twitter.com/jamesqquick)
-- Website - [James Q Quick](https://jamesqquick.com)
+- Website - [Nguyen Hoang Linh](https://github.com/hlinh1512/StudentEnrolmentSystem#read-me-template)
 
-[Back To The Top](#read-me-template)
+[Back To The Top](#student-enrolment-system)
