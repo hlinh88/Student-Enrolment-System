@@ -106,7 +106,6 @@ public class StudentEnrolment implements StudentEnrolmentManager {
                 return true;
             }
         }
-        System.out.println("Invalid!");
         return false;
     }
 
@@ -120,7 +119,6 @@ public class StudentEnrolment implements StudentEnrolmentManager {
                 return true;
             }
         }
-        System.out.println("Invalid!");
         return false;
     }
 

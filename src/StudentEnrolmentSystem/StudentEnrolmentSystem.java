@@ -93,8 +93,6 @@ public class StudentEnrolmentSystem {
         }
 
 
-        
-
 
 
         //main while loop display menu
@@ -278,6 +276,9 @@ public class StudentEnrolmentSystem {
                             if (studentEnrolment.add(newCourseEnrollment)){
                                 System.out.println("Added successfully!!!");
                             }
+                            else{
+                                System.out.println("Invalid");
+                            }
 
 
 
@@ -293,6 +294,9 @@ public class StudentEnrolmentSystem {
                                     //Find the course and delete in the StudentEnrollment List in StudentEnrollment.java
                                     if(studentEnrolment.delete(enrolment)){
                                         System.out.println("Deleted successfully!!!");
+                                    }
+                                    else{
+                                        System.out.println("Invalid");
                                     }
                                     break;
                                 }
@@ -316,6 +320,9 @@ public class StudentEnrolmentSystem {
                                     //Update it in the StudentEnrollment List in StudentEnrollment.java
                                     if(studentEnrolment.update(temp, enrolment)){
                                         System.out.println("Updated successfully!!!");
+                                    }
+                                    else{
+                                        System.out.println("Invalid");
                                     }
 
                                 }
