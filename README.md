@@ -21,7 +21,7 @@ The Student Enrolment System contains 9 main functions for users to select.
 
 ---
 
-## Main Menu
+## Main menu
 
 1. Create a student information
 2. Create a course information
