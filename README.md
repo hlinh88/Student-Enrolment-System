@@ -20,7 +20,6 @@ You're sections headers will be used to reference location of destination.
 
 The Student Enrolment System contains 9 main functions for users to select.
 
-[Back To The Top](#student-enrolment-system)
 ---
 
 ## Main Menu
@@ -35,7 +34,6 @@ The Student Enrolment System contains 9 main functions for users to select.
 8. Get information of one enrollment
 9. Display all enrollments
 
-[Back To The Top](#student-enrolment-system)
 ---
 
 ## How To Use
@@ -46,13 +44,9 @@ The Student Enrolment System contains 9 main functions for users to select.
 
 
 
-[Back To The Top](#student-enrolment-system)
-
 
 ---
 
 ## Author Info
 
 - Website - [Nguyen Hoang Linh](https://github.com/hlinh1512)
-
-[Back To The Top](#student-enrolment-system)
