@@ -1,4 +1,4 @@
-#Student Enrolment System
+# Student Enrolment System
 
 ![Project Image](project-image-url)
 
