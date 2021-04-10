@@ -1,13 +1,12 @@
 # Student Enrolment System
 
-![Project Image](project-image-url)
+![Project Image](https://github.com/hlinh1512/StudentEnrolmentSystem/blob/main/menu.png)
 
 > Welcome to my Student Enrolment System
 
 ---
 
 ### Table of Contents
-You're sections headers will be used to reference location of destination.
 
 - [Description](#description)
 - [Main Menu] (#main-menu)
