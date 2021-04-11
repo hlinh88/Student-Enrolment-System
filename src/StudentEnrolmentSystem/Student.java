@@ -1,6 +1,7 @@
 package StudentEnrolmentSystem;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Student {
     private String id;
@@ -84,5 +85,9 @@ public class Student {
         return this.id == ((Student) obj).id
                 && this.name == ((Student) obj).name
                 && this.birthdate == ((Student) obj).birthdate;
+    }
+    @Override
+    public int hashCode(){
+        return Objects.hash(id, name, birthdate);
     }
 }
