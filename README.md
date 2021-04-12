@@ -37,6 +37,8 @@ The Student Enrolment System contains 9 main functions for users to select.
 
 ## How To Use
 
+**In order of enrolment a student process, user should input student information and course information in option one and two along with a semester to have a full information for an enrolment in option three**
+
 **This system will not directly enroll a student enrolment into the list. It will ask the user to create or choose correct information of student and course inside the studentList and courseList provided.**
 
 **This system's action is based on user interact and user choice.**
