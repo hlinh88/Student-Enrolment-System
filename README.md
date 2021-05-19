@@ -1,4 +1,4 @@
-# Student Enrolment System
+# Student Enrolment System got 19/20 woohoo
 
 ![Project Image](https://github.com/hlinh1512/StudentEnrolmentSystem/blob/main/menu.png)
 
